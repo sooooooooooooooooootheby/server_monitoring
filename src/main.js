@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const path = require("path");
 const { createServer } = require("node:http");
@@ -16,6 +17,8 @@ const server = createServer(app);
 
 // 初始化 socket.io
 const io = new Server(server);
+
+app.use(cors());
 
 const sendInfo = async () => {
     try {
