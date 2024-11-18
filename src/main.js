@@ -7,7 +7,10 @@ const pm2 = require("pm2");
 const si = require("systeminformation");
 const { Server } = require("socket.io");
 
+// 端口
 const port = 4567;
+// 每次发送数据的时间间隔
+const timeout = 300000;
 
 const server = createServer(app);
 
@@ -79,7 +82,7 @@ sendInfo();
 
 setInterval(async () => {
     sendInfo();
-}, 1000);
+}, timeout);
 
 // pm2 进程
 app.get("/pm2", (req, res) => {
