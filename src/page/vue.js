@@ -36,7 +36,8 @@ const app = createApp({
             this.color = localColor;
             this.updateColor();
         }
-        const socket = io(); // 连接到服务器
+        // const socket = io("https://api.sooooooooooooooooootheby.top"); // 连接到服务器
+        const socket = io("127.0.0.1:3000"); // 连接到服务器
 
         // 监听服务器推送的状态更新
         socket.on("server-status", (data) => {

@@ -1,26 +1,23 @@
 const express = require("express");
-const cors = require("cors");
-const app = express();
-const path = require("path");
 const { createServer } = require("node:http");
+const { Server } = require("socket.io");
+
+const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 const pm2 = require("pm2");
 const si = require("systeminformation");
-const { Server } = require("socket.io");
 
-// 端口
-const port = 4567;
-// 每次发送数据的时间间隔
+app.get("/", (req, res) => {
+    res.send("<h1>Hello world</h1>");
+});
+
+const port = 3000;
 const timeout = 300000;
 
-const server = createServer(app);
-
-// 初始化 socket.io
-const io = new Server(server);
-
-app.use(cors());
-
 const sendInfo = async () => {
+    console.log(1);
     try {
         // 创建对象分别存储服务器信息和pm2信息
         const serverInfo = {
@@ -39,7 +36,7 @@ const sendInfo = async () => {
         serverInfo.cpu = cpuLoad.currentLoad.toFixed(2); // CPU 当前负载
         // 获取内存使用情况
         const memory = await si.mem(); // 内存使用情况
-        serverInfo.memory = (memory.used / memory.total * 100).toFixed(2); // 已用内存
+        serverInfo.memory = ((memory.used / memory.total) * 100).toFixed(2); // 已用内存
         // 获取磁盘使用情况
         const disks = await si.fsSize(); // 磁盘使用情况
         serverInfo.disk = disks.map((disk) => ({
@@ -77,41 +74,18 @@ const sendInfo = async () => {
             io.emit("server-status", packagedInfo);
         });
     } catch (err) {
-        console.error("Error fetching server info:", err);
+        console.log("Error fetching server info:", err);
     }
 };
 
-sendInfo();
+io.on("connection", (socket) => {
+    sendInfo();
+});
 
 setInterval(async () => {
     sendInfo();
 }, timeout);
 
-// pm2 进程
-app.get("/pm2", (req, res) => {
-    pm2.list((err, list) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        const sanitizedList = list.map((app) => ({
-            name: app.name, // 应用名称
-            pid: app.pid, // 进程 ID
-            status: app.pm2_env.status, // 状态（如 online、stopped）
-            cpu: app.monit.cpu, // CPU 占用
-            memory: app.monit.memory, // 内存占用
-            uptime: app.pm2_env.pm_uptime, // 启动时间
-        }));
-
-        res.send(list);
-    });
-});
-
-// web面板
-app.use(express.static(path.join(__dirname, "/page")));
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
-});
-
 server.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`server running at http://localhost:${port}`);
 });
