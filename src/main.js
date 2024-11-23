@@ -13,11 +13,10 @@ app.get("/", (req, res) => {
     res.send("<h1>Hello world</h1>");
 });
 
-const port = 3000;
+const port = 4567;
 const timeout = 300000;
 
 const sendInfo = async () => {
-    console.log(1);
     try {
         // 创建对象分别存储服务器信息和pm2信息
         const serverInfo = {

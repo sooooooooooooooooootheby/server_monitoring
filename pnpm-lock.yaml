@@ -23,6 +23,9 @@ importers:
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1
+      systeminformation:
+        specifier: ^5.23.5
+        version: 5.23.5
 
 packages:
 
@@ -1718,8 +1721,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  systeminformation@5.23.5:
-    optional: true
+  systeminformation@5.23.5: {}
 
   to-regex-range@5.0.1:
     dependencies:
