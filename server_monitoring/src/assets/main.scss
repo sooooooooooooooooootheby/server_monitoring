@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mdui-card {
+    padding: 24px;
+}
+
+mdui-linear-progress {
+    margin: 6px 0;
+}
+mdui-circular-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 950px) {
+    body {
+        display: block;
+    }
+}
