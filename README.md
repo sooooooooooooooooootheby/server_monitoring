@@ -70,3 +70,9 @@ const server_list = ref([
     },
 ]);
 ```
+
+关于反向代理
+
+项目默认开启反向代理并使用自定义路径。
+
+如果你需要修改反向代理请参考[socket.io文档](https://socket.io/zh-CN/docs/v4/reverse-proxy/)进行修改, 默认值为`/server_monitoring/`
