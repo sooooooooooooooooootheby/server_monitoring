@@ -16,16 +16,12 @@ let connectionCount = 0;
 io.on("connection", (socket) => {
     if (connectionCount >= maxConnections) {
         socket.disconnect(true);
-        console.log("Connection refused: maximum number of connections reached.");
         return;
     }
 
     connectionCount++;
-    console.log(`Client connected. Current connections: ${connectionCount}`);
-
     socket.on("disconnect", () => {
         connectionCount--;
-        console.log(`Client disconnected. Current connections: ${connectionCount}`);
     });
 
     getInformation();

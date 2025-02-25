@@ -6,7 +6,7 @@
 
 本项目有两个前端页面, 一个是 server_monitoring, 一个是 W2W.
 
-server_monitoring 是旧页面,已经不再维护, W2W 是新的页面.
+server_monitoring 是旧主题,已经不再维护, W2W 是新的主题.
 
 server_monitoring:
 ![server_monitoring](./server_monitoring.webp)
