@@ -1,0 +1,24 @@
+{
+    "name": "W2W",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
+    },
+    "dependencies": {
+        "@iconify/vue": "^4.3.0",
+        "axios": "^1.7.9",
+        "sass": "^1.85.0",
+        "socket.io-client": "^4.8.1",
+        "vue": "^3"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^2",
+        "@vue/compiler-sfc": "^3",
+        "autoprefixer": "^10",
+        "daisyui": "^3",
+        "postcss": "^8",
+        "tailwindcss": "^3",
+        "vite": "^2"
+    }
+}

@@ -1,8 +1,8 @@
 import { Server } from "socket.io";
 import { getInformation } from "./monitoring.js";
-
 const port = 4568;
-const time = 300000;
+const time = 1000000;
+const maxConnections = 5;
 
 const io = new Server(port, {
     cors: {
@@ -11,7 +11,23 @@ const io = new Server(port, {
     path: "/server_monitoring/",
 });
 
+let connectionCount = 0;
+
 io.on("connection", (socket) => {
+    if (connectionCount >= maxConnections) {
+        socket.disconnect(true);
+        console.log("Connection refused: maximum number of connections reached.");
+        return;
+    }
+
+    connectionCount++;
+    console.log(`Client connected. Current connections: ${connectionCount}`);
+
+    socket.on("disconnect", () => {
+        connectionCount--;
+        console.log(`Client disconnected. Current connections: ${connectionCount}`);
+    });
+
     getInformation();
     start();
 });

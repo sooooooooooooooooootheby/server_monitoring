@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+
+    --border-color: #E8E9EB;
+}
+body {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}

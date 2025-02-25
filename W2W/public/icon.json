@@ -1,0 +1,8 @@
+{
+    "ubuntu": "mdi:ubuntu",
+    "Ubuntu": "mdi:ubuntu",
+    "Windows": "fa6-brands:windows",
+    "centos": "fa6-brands:centos",
+    "debian": "fa6-brands:debian",
+    "fedora": "fa6-brands:fedora"
+}
